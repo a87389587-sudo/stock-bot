@@ -1,4 +1,4 @@
-name: Stock Report Auto Run
+name: Stock Report Auto Run1
 
 on:
   workflow_dispatch: # 讓您可以手動測試
