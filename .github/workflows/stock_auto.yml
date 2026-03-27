@@ -1,0 +1,20 @@
+name: Stock Report Auto Run
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 1 * * *'
+
+jobs:
+  run-stock-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Send LINE Notify
+        run: |
+          curl -X POST https://notify-api.line.me/api/notify \
+          -H "Authorization: Bearer ${{ secrets.LINE_NOTIFY_TOKEN }}" \
+          -F "message=股票籌碼報告測試成功"
