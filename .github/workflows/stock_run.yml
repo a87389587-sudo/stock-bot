@@ -1,0 +1,28 @@
+name: 股票報告自動運行
+
+on:
+  workflow_dispatch: # 手動執行按鈕
+  schedule:
+    - cron: '30 6 * * 1-5' # 台北時間週一至週五 14:30 執行
+
+jobs:
+  run_bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 檢出儲存庫
+        uses: actions/checkout@v3
+
+      - name: 設定 Python 版本
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: 安裝套件
+        run: |
+          pip install pandas requests
+
+      - name: 執行股票腳本
+        env:
+          LINE_ACCESS_TOKEN: ${{ secrets.LINE_ACCESS_TOKEN }}
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+        run: python main.py
