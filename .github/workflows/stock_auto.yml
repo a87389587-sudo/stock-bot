@@ -1,5 +1,0 @@
-      -name: 發送 LINE 通知
-        run: |
-          curl -X POST https://notify-api.line.me/api/notify \
-          -H "Authorization: Bearer ${{ secrets.LINE_NOTIFY_TOKEN }}" \
-          -F "message=股票報告已生成"
